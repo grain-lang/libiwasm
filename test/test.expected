@@ -1,0 +1,9 @@
+wasm_runtime_init success
+Data read
+wasm_mod created
+wasi stuff set
+wasm_mod instantiated
+Hello world
+1234
+Ran successfully
+wasm_runtime_destroy

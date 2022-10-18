@@ -1,0 +1,99 @@
+(rule
+ (targets lib_export.h wasm_export.h)
+ (deps
+  (source_tree wasm-micro-runtime))
+ (action
+  (no-infer
+   (progn
+    (copy wasm-micro-runtime/core/iwasm/include/lib_export.h lib_export.h)
+    (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
+
+(rule
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.so)
+ (locks .)
+ (deps
+  CMakeLists.txt
+  (source_tree wasm-micro-runtime))
+ (enabled_if
+  (= %{system} macosx))
+ (action
+  (no-infer
+   (progn
+    (run
+     "cmake"
+     "-S"
+     "."
+     "-B"
+     "."
+     "-G"
+     "Unix Makefiles"
+     "-DCMAKE_BUILD_TYPE=Release"
+     "-DWAMR_BUILD_PLATFORM=darwin")
+    (run cmake --build . --config Release -- -j4)
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.dylib dlliwasm_c.so)))))
+
+(rule
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.so)
+ (locks .)
+ (deps
+  CMakeLists.txt
+  (source_tree wasm-micro-runtime))
+ (enabled_if
+  (= %{system} linux))
+ (action
+  (no-infer
+   (progn
+    (run
+     "cmake"
+     "-S"
+     "."
+     "-B"
+     "."
+     "-G"
+     "Unix Makefiles"
+     "-DCMAKE_BUILD_TYPE=Release"
+     "-DWAMR_BUILD_PLATFORM=linux")
+    (run cmake --build . --config Release -- -j4)
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.so dlliwasm_c.so)))))
+
+(rule
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.dll)
+ (locks .)
+ (deps
+  CMakeLists.txt
+  (source_tree wasm-micro-runtime))
+ (enabled_if
+  (= %{system} mingw64))
+ (action
+  (no-infer
+   (progn
+    (run
+     "cmake"
+     "-S"
+     "."
+     "-B"
+     "."
+     "-G"
+     "Unix Makefiles"
+     "-DCMAKE_SYSTEM_NAME=Windows"
+     "-DCMAKE_BUILD_TYPE=Release"
+     "-DWAMR_BUILD_PLATFORM=windows"
+     "-DWAMR_BUILD_TARGET=X86_64")
+    (run cmake --build . --config Release -- -j4)
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.dll dlliwasm_c.dll)))))
+
+(library
+ (name libiwasm)
+ (modules)
+ (public_name libiwasm)
+ (foreign_archives iwasm_c)
+ (c_library_flags
+  :standard
+  (:include ./config/c_library_flags.sexp))
+ (install_c_headers lib_export wasm_export))

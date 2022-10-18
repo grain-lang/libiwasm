@@ -1,0 +1,5 @@
+.github         export-ignore
+.ocamlformat    export-ignore
+
+# Ensure wasm always use LF
+*.wasm binary
