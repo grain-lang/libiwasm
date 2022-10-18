@@ -1,0 +1,24 @@
+opam-version: "2.0"
+version: "0.0.0"
+synopsis: "The iwasm core from wasm-micro-runtime packaged for OCaml"
+maintainer: "blaine@grain-lang.org"
+author: "Blaine Bublitz"
+license: "Apache-2.0"
+homepage: "https://github.com/grain-lang/libiwasm"
+dev-repo: "git+https://github.com/grain-lang/libiwasm.git"
+bug-reports: "https://github.com/grain-lang/libiwasm/issues"
+build: [
+  [ "dune" "subst" ] {dev}
+  [ "dune" "build" "-p" name "-j" jobs ]
+  [ "dune" "runtest" ] {with-test}
+]
+depends: [
+  "conf-cmake" {build}
+  "dune" {>= "3.1.0"}
+  "dune-configurator" {>= "3.1.0"}
+  "ocaml" {>= "4.12"}
+  "ctypes" {with-test}
+]
+depexts: [
+  ["gcc-g++"] { os-distribution = "cygwinports" }
+]

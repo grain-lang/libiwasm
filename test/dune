@@ -1,0 +1,7 @@
+(test
+ (name test)
+ (modules test)
+ (deps test.gr.wasm)
+ (libraries wamr)
+ (action
+  (run %{test})))

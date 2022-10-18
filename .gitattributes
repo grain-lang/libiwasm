@@ -1,0 +1,4 @@
+.github         export-ignore
+.ocamlformat    export-ignore
+
+*.wasm          binary
