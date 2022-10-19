@@ -1,0 +1,21 @@
+(rule
+ (targets lib_export.h wasm_export.h)
+ (deps
+  (source_tree wasm-micro-runtime))
+ (action
+  (no-infer
+   (progn
+    (copy wasm-micro-runtime/core/iwasm/include/lib_export.h lib_export.h)
+    (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
+
+(rule
+ (action
+  (copy libwamr.dylib dllwamr.so)))
+
+(library
+ (name libwamr_c)
+ (modules)
+ (public_name libwamr.c)
+ (foreign_archives wamr)
+ (c_library_flags :standard)
+ (install_c_headers lib_export wasm_export))

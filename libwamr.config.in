@@ -1,0 +1,27 @@
+opam-version: "2.0"
+variables {
+    no_interp: %{_:no_interp?true:false}%
+    classic_interp: %{_:classic_interp?true:false}%
+    aot: %{_:aot?true:false}%
+    jit: %{_:jit?true:false}%
+    fast_jit: %{_:fast_jit?true:false}%
+    libc: %{_:libc?true:false}%
+    wasi: %{_:wasi?true:false}%
+    uvwasi: %{_:uvwasi?true:false}%
+    multi_module: %{_:multi_module?true:false}%
+    mini_loader: %{_:mini_loader?true:false}%
+    shared_memory: %{_:shared_memory?true:false}%
+    bulk_memory: %{_:bulk_memory?true:false}%
+    thread_manager: %{_:thread_manager?true:false}%
+    pthread: %{_:pthread?true:false}%
+    pthread_semaphore: %{_:pthread_semaphore?true:false}%
+    tail_call: %{_:tail_call?true:false}%
+    simd: %{_:simd?true:false}%
+    custom_name_section: %{_:custom_name_section?true:false}%
+    dump_call_stack: %{_:dump_call_stack?true:false}%
+    memory_profiling: %{_:memory_profiling?true:false}%
+    perf_profiling: %{_:perf_profiling?true:false}%
+    ref_types: %{_:ref_types?true:false}%
+    debug_interp: %{_:debug_interp?true:false}%
+    load_custom_section: %{_:load_custom_section?true:false}%
+}
