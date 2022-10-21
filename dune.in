@@ -1,0 +1,116 @@
+(rule
+ (targets lib_export.h wasm_export.h)
+ (deps
+  (source_tree wasm-micro-runtime))
+ (action
+  (no-infer
+   (progn
+    (copy wasm-micro-runtime/core/iwasm/include/lib_export.h lib_export.h)
+    (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
+
+; (rule
+;  (action
+;   (copy libwamr.dylib dllwamr.so)))
+
+(rule
+ (targets libwamr.a)
+ (locks .)
+ (deps
+  CMakeLists.txt
+  (source_tree wasm-micro-runtime))
+ (enabled_if
+  (= %{system} macosx))
+ (action
+  (no-infer
+   (progn
+    (run
+     "cmake"
+     "-S"
+     "."
+     "-B"
+     "."
+     "-G"
+     "Unix Makefiles"
+     "-DWAMR_BUILD_PLATFORM=darwin"
+     "-DBUILD_SHARED_LIBS=0"
+     "-DWAMR_BUILD_INTERP=%{_:no_interp?0:1}%"
+     "-DWAMR_BUILD_FAST_INTERP=%{_:classic_interp?0:1}%"
+     "-DWAMR_BUILD_AOT=%{_:aot?1:0}%"
+     "-DWAMR_BUILD_JIT=%{_:jit?1:0}%"
+     "-DWAMR_BUILD_FAST_JIT=%{_:fast_jit?1:0}%"
+     "-DWAMR_BUILD_LIBC_BUILTIN=%{_:libc?1:0}%"
+     "-DWAMR_BUILD_LIBC_WASI=%{_:wasi?1:0}%"
+     "-DWAMR_BUILD_LIBC_UVWASI=%{_:uvwasi?1:0}%"
+     "-DWAMR_BUILD_MULTI_MODULE=%{_:multi_module?1:0}%"
+     "-DWAMR_BUILD_MINI_LOADER=%{_:mini_loader?1:0}%"
+     "-DWAMR_BUILD_SHARED_MEMORY=%{_:shared_memory?1:0}%"
+     "-DWAMR_BUILD_BULK_MEMORY=%{_:bulk_memory?1:0}%"
+     "-DWAMR_BUILD_THREAD_MGR=%{_:thread_manager?1:0}%"
+     "-DWAMR_BUILD_LIB_PTHREAD=%{_:pthread?1:0}%"
+     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=%{_:pthread_semaphore?1:0}%"
+     "-DWAMR_BUILD_TAIL_CALL=%{_:tail_call?1:0}%"
+     "-DWAMR_BUILD_SIMD=%{_:simd?1:0}%"
+     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=%{_:custom_name_section?1:0}%"
+     "-DWAMR_BUILD_DUMP_CALL_STACK=%{_:dump_call_stack?1:0}%"
+     "-DWAMR_BUILD_MEMORY_PROFILING=%{_:memory_profiling?1:0}%"
+     "-DWAMR_BUILD_PERF_PROFILING=%{_:perf_profiling?1:0}%"
+     "-DWAMR_BUILD_REF_TYPES=%{_:ref_types?1:0}%"
+     "-DWAMR_BUILD_DEBUG_INTERP=%{_:debug_interp?1:0}%"
+     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=%{_:load_custom_section?1:0}%")
+    (run cmake --build . -- -j4)))))
+
+(rule
+ (targets dllwamr.so)
+ (locks .)
+ (deps
+  CMakeLists.txt
+  (source_tree wasm-micro-runtime))
+ (enabled_if
+  (= %{system} macosx))
+ (action
+  (no-infer
+   (progn
+    (run
+     "cmake"
+     "-S"
+     "."
+     "-B"
+     "."
+     "-G"
+     "Unix Makefiles"
+     "-DWAMR_BUILD_PLATFORM=darwin"
+     "-DBUILD_SHARED_LIBS=1"
+     "-DWAMR_BUILD_INTERP=%{_:no_interp?0:1}%"
+     "-DWAMR_BUILD_FAST_INTERP=%{_:classic_interp?0:1}%"
+     "-DWAMR_BUILD_AOT=%{_:aot?1:0}%"
+     "-DWAMR_BUILD_JIT=%{_:jit?1:0}%"
+     "-DWAMR_BUILD_FAST_JIT=%{_:fast_jit?1:0}%"
+     "-DWAMR_BUILD_LIBC_BUILTIN=%{_:libc?1:0}%"
+     "-DWAMR_BUILD_LIBC_WASI=%{_:wasi?1:0}%"
+     "-DWAMR_BUILD_LIBC_UVWASI=%{_:uvwasi?1:0}%"
+     "-DWAMR_BUILD_MULTI_MODULE=%{_:multi_module?1:0}%"
+     "-DWAMR_BUILD_MINI_LOADER=%{_:mini_loader?1:0}%"
+     "-DWAMR_BUILD_SHARED_MEMORY=%{_:shared_memory?1:0}%"
+     "-DWAMR_BUILD_BULK_MEMORY=%{_:bulk_memory?1:0}%"
+     "-DWAMR_BUILD_THREAD_MGR=%{_:thread_manager?1:0}%"
+     "-DWAMR_BUILD_LIB_PTHREAD=%{_:pthread?1:0}%"
+     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=%{_:pthread_semaphore?1:0}%"
+     "-DWAMR_BUILD_TAIL_CALL=%{_:tail_call?1:0}%"
+     "-DWAMR_BUILD_SIMD=%{_:simd?1:0}%"
+     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=%{_:custom_name_section?1:0}%"
+     "-DWAMR_BUILD_DUMP_CALL_STACK=%{_:dump_call_stack?1:0}%"
+     "-DWAMR_BUILD_MEMORY_PROFILING=%{_:memory_profiling?1:0}%"
+     "-DWAMR_BUILD_PERF_PROFILING=%{_:perf_profiling?1:0}%"
+     "-DWAMR_BUILD_REF_TYPES=%{_:ref_types?1:0}%"
+     "-DWAMR_BUILD_DEBUG_INTERP=%{_:debug_interp?1:0}%"
+     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=%{_:load_custom_section?1:0}%")
+    (run cmake --build . -- -j4)
+    (copy libwamr.dylib dllwamr.so)))))
+
+(library
+ (name libwamr_c)
+ (modules)
+ (public_name libwamr.c)
+ (foreign_archives wamr)
+ (c_library_flags :standard)
+ (install_c_headers lib_export wasm_export))
