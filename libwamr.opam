@@ -8,85 +8,15 @@ homepage: "https://github.com/grain-lang/libwamr"
 dev-repo: "git+https://github.com/grain-lang/libwamr.git"
 bug-reports: "https://github.com/grain-lang/libwamr/issues"
 build: [
-  [ "opam" "config" "subst" "libwamr.config"]
-  [ "opam" "config" "subst" "dune"]
-  # [ "cmake"
-  #   "-S" "."
-  #   "-B" "."
-  #   "-G" "Unix Makefiles"
-  #   "-DWAMR_BUILD_PLATFORM=darwin" {os = "macos"}
-  #   "-DWAMR_BUILD_PLATFORM=windows" {os = "win32"}
-  #   "-DWAMR_BUILD_PLATFORM=windows" {os = "cygwin"}
-  #   "-DWAMR_BUILD_PLATFORM=linux" {os = "linux"}
-  #   "-DBUILD_SHARED_LIBS=0"
-  #   "-DWAMR_BUILD_INTERP=%{_:no_interp?0:1}%"
-  #   "-DWAMR_BUILD_FAST_INTERP=%{_:classic_interp?0:1}%"
-  #   "-DWAMR_BUILD_AOT=%{_:aot?1:0}%"
-  #   "-DWAMR_BUILD_JIT=%{_:jit?1:0}%"
-  #   "-DWAMR_BUILD_FAST_JIT=%{_:fast_jit?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_BUILTIN=%{_:libc?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_WASI=%{_:wasi?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_UVWASI=%{_:uvwasi?1:0}%"
-  #   "-DWAMR_BUILD_MULTI_MODULE=%{_:multi_module?1:0}%"
-  #   "-DWAMR_BUILD_MINI_LOADER=%{_:mini_loader?1:0}%"
-  #   "-DWAMR_BUILD_SHARED_MEMORY=%{_:shared_memory?1:0}%"
-  #   "-DWAMR_BUILD_BULK_MEMORY=%{_:bulk_memory?1:0}%"
-  #   "-DWAMR_BUILD_THREAD_MGR=%{_:thread_manager?1:0}%"
-  #   "-DWAMR_BUILD_LIB_PTHREAD=%{_:pthread?1:0}%"
-  #   "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=%{_:pthread_semaphore?1:0}%"
-  #   "-DWAMR_BUILD_TAIL_CALL=%{_:tail_call?1:0}%"
-  #   "-DWAMR_BUILD_SIMD=%{_:simd?1:0}%"
-  #   "-DWAMR_BUILD_CUSTOM_NAME_SECTION=%{_:custom_name_section?1:0}%"
-  #   "-DWAMR_BUILD_DUMP_CALL_STACK=%{_:dump_call_stack?1:0}%"
-  #   "-DWAMR_BUILD_MEMORY_PROFILING=%{_:memory_profiling?1:0}%"
-  #   "-DWAMR_BUILD_PERF_PROFILING=%{_:perf_profiling?1:0}%"
-  #   "-DWAMR_BUILD_REF_TYPES=%{_:ref_types?1:0}%"
-  #   "-DWAMR_BUILD_DEBUG_INTERP=%{_:debug_interp?1:0}%"
-  #   "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=%{_:load_custom_section?1:0}%"
-  # ]
-  # [ "cmake" "--build" "." "--" "-j" jobs]
-  # [ "cmake"
-  #   "-S" "."
-  #   "-B" "."
-  #   "-G" "Unix Makefiles"
-  #   "-DWAMR_BUILD_PLATFORM=darwin" {os = "macos"}
-  #   "-DWAMR_BUILD_PLATFORM=windows" {os = "win32"}
-  #   "-DWAMR_BUILD_PLATFORM=windows" {os = "cygwin"}
-  #   "-DWAMR_BUILD_PLATFORM=linux" {os = "linux"}
-  #   "-DBUILD_SHARED_LIBS=1"
-  #   "-DWAMR_BUILD_INTERP=%{_:no_interp?0:1}%"
-  #   "-DWAMR_BUILD_FAST_INTERP=%{_:classic_interp?0:1}%"
-  #   "-DWAMR_BUILD_AOT=%{_:aot?1:0}%"
-  #   "-DWAMR_BUILD_JIT=%{_:jit?1:0}%"
-  #   "-DWAMR_BUILD_FAST_JIT=%{_:fast_jit?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_BUILTIN=%{_:libc?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_WASI=%{_:wasi?1:0}%"
-  #   "-DWAMR_BUILD_LIBC_UVWASI=%{_:uvwasi?1:0}%"
-  #   "-DWAMR_BUILD_MULTI_MODULE=%{_:multi_module?1:0}%"
-  #   "-DWAMR_BUILD_MINI_LOADER=%{_:mini_loader?1:0}%"
-  #   "-DWAMR_BUILD_SHARED_MEMORY=%{_:shared_memory?1:0}%"
-  #   "-DWAMR_BUILD_BULK_MEMORY=%{_:bulk_memory?1:0}%"
-  #   "-DWAMR_BUILD_THREAD_MGR=%{_:thread_manager?1:0}%"
-  #   "-DWAMR_BUILD_LIB_PTHREAD=%{_:pthread?1:0}%"
-  #   "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=%{_:pthread_semaphore?1:0}%"
-  #   "-DWAMR_BUILD_TAIL_CALL=%{_:tail_call?1:0}%"
-  #   "-DWAMR_BUILD_SIMD=%{_:simd?1:0}%"
-  #   "-DWAMR_BUILD_CUSTOM_NAME_SECTION=%{_:custom_name_section?1:0}%"
-  #   "-DWAMR_BUILD_DUMP_CALL_STACK=%{_:dump_call_stack?1:0}%"
-  #   "-DWAMR_BUILD_MEMORY_PROFILING=%{_:memory_profiling?1:0}%"
-  #   "-DWAMR_BUILD_PERF_PROFILING=%{_:perf_profiling?1:0}%"
-  #   "-DWAMR_BUILD_REF_TYPES=%{_:ref_types?1:0}%"
-  #   "-DWAMR_BUILD_DEBUG_INTERP=%{_:debug_interp?1:0}%"
-  #   "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=%{_:load_custom_section?1:0}%"
-  # ]
-  # [ "cmake" "--build" "." "--" "-j" jobs]
   [ "dune" "subst" ] {dev}
   [ "dune" "build" "-p" name "-j" jobs ]
   [ "dune" "runtest" ] {with-test}
 ]
-install: []
+substs: [
+  "libwamr.config"
+  "dune"
+]
 depends: [
-  "conf-cmake" {build}
   "dune" {>= "3.1.0"}
   "ocaml" {>= "4.12"}
 ]
