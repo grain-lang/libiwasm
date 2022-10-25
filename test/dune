@@ -1,12 +1,12 @@
 (executable
  (name test)
- (libraries libwamr.c)
+ (libraries libwamr)
  (flags
   (:standard -w -9-27-33))
  (ctypes
   (external_library_name wamr_c)
   (headers
-   (preamble "#include \"%{lib:libwamr.c:wasm_export.h}\""))
+   (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
   (type_description
    (instance Type)
    (functor Wamr_type_description))
