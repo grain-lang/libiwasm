@@ -12,10 +12,6 @@ build: [
   [ "dune" "build" "-p" name "-j" jobs ]
   [ "dune" "runtest" ] {with-test}
 ]
-substs: [
-  "libwamr.config"
-  "dune"
-]
 depends: [
   "dune" {>= "3.1.0"}
   "ocaml" {>= "4.12"}
