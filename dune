@@ -160,7 +160,7 @@
 (library
  (name libwamr_c)
  (modules)
- (public_name libwamr)
+ (public_name libwamr.c)
  (foreign_archives wamr)
  (c_library_flags :standard -lpthread)
  (install_c_headers lib_export wasm_export))
