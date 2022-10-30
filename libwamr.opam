@@ -1,6 +1,6 @@
 opam-version: "2.0"
 version: "0.0.0"
-synopsis: "wasm-micro-runtime's iwasm core packaged for OCaml"
+synopsis: "The iwasm core from wasm-micro-runtime packaged for OCaml"
 maintainer: "blaine@grain-lang.org"
 author: "Blaine Bublitz"
 license: "Apache-2.0"
