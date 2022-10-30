@@ -15,6 +15,7 @@ build: [
 depends: [
   "dune" {>= "3.1.0"}
   "ocaml" {>= "4.12"}
+  "ctypes" {with-test}
 ]
 depexts: [
   ["gcc-g++"] { os-distribution = "cygwinports" }
