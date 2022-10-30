@@ -30,7 +30,7 @@ jobs:
           opam exec -- which cmake
 
       - name: Install local dependencies
-        run: opam install . --strict
+        run: opam install . --deps-only --with-test
 
       - name: Build project
         run: opam exec -- dune build
