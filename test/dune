@@ -1,27 +1,6 @@
-(executable
+(test
  (name test)
- (libraries libwamr)
- (flags
-  (:standard -w -9-27-33))
- (ctypes
-  (external_library_name foobar)
-  (build_flags_resolver
-   (vendored
-    (c_flags :standard)
-    (c_library_flags :standard "-I%{lib:libwamr:libwamr.a}")))
-  (headers
-   (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
-  (type_description
-   (instance Type)
-   (functor Wamr_type_description))
-  (function_description
-   (concurrency sequential)
-   (instance Functions)
-   (functor Wamr_function_description))
-  (generated_types Types_generated)
-  (generated_entry_point Wamr)))
-
-(rule
- (alias runtest)
+ (modules test)
+ (libraries wamr)
  (action
-  (run ./test.exe)))
+  (run %{test})))
