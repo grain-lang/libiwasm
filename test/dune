@@ -7,8 +7,8 @@
   (external_library_name foobar)
   (build_flags_resolver
    (vendored
-    (c_flags :standard "-I%{lib:libwamr:libwamr.a}")
-    (c_library_flags :standard)))
+    (c_flags :standard)
+    (c_library_flags :standard "-I%{lib:libwamr:libwamr.a}")))
   (headers
    (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
   (type_description
