@@ -9,7 +9,7 @@
     (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
 
 (rule
- (targets libwamr.a dllwamr.so)
+ (targets librawwamr.a dllrawwamr.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -54,11 +54,11 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr_static.a libwamr.a)
-    (copy libwamr_shared.dylib dllwamr.so)))))
+    (copy libwamr_static.a librawwamr.a)
+    (copy libwamr_shared.dylib dllrawwamr.so)))))
 
 (rule
- (targets libwamr.a dllwamr.so)
+ (targets librawwamr.a dllrawwamr.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -103,11 +103,11 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr_static.a libwamr.a)
-    (copy libwamr_shared.so dllwamr.so)))))
+    (copy libwamr_static.a librawwamr.a)
+    (copy libwamr_shared.so dllrawwamr.so)))))
 
 (rule
- (targets libwamr.a dllwamr.dll)
+ (targets librawwamr.a dllrawwamr.dll)
  (locks .)
  (deps
   CMakeLists.txt
@@ -154,13 +154,13 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr_static.a libwamr.a)
-    (copy libwamr_shared.dll dllwamr.dll)))))
+    (copy libwamr_static.a librawwamr.a)
+    (copy libwamr_shared.dll dllrawwamr.dll)))))
 
 (library
- (name libwamr_c)
+ (name libwamr)
  (modules)
- (public_name libwamr.c)
- (foreign_archives wamr)
+ (public_name libwamr)
+ (foreign_archives rawwamr)
  (c_library_flags :standard -lpthread)
  (install_c_headers lib_export wasm_export))
