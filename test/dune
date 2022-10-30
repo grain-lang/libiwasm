@@ -4,7 +4,7 @@
  (flags
   (:standard -w -9-27-33))
  (ctypes
-  (external_library_name libwamr_c)
+  (external_library_name libwamr)
   (headers
    (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
   (type_description
