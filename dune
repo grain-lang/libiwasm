@@ -9,7 +9,7 @@
     (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
 
 (rule
- (targets libwamr.a)
+ (targets libwamr.a dllwamr.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -27,55 +27,6 @@
      "."
      "-G"
      "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=0"
-     "-DCMAKE_BUILD_TYPE=Release"
-     "-DWAMR_BUILD_PLATFORM=darwin"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=0"
-     "-DWAMR_BUILD_LIBC_WASI=1"
-     "-DWAMR_BUILD_LIBC_UVWASI=0"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
-    (run cmake --build . --config Release -- -j4)))))
-
-(rule
- (targets dllwamr.so)
- (locks .)
- (deps
-  CMakeLists.txt
-  (source_tree wasm-micro-runtime))
- (enabled_if
-  (= %{system} macosx))
- (action
-  (no-infer
-   (progn
-    (run
-     "cmake"
-     "-S"
-     "."
-     "-B"
-     "."
-     "-G"
-     "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=1"
      "-DCMAKE_BUILD_TYPE=Release"
      "-DWAMR_BUILD_PLATFORM=darwin"
      "-DWAMR_BUILD_INTERP=1"
@@ -103,10 +54,11 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr.dylib dllwamr.so)))))
+    (copy libwamr_static.a libwamr.a)
+    (copy libwamr_shared.dylib dllwamr.so)))))
 
 (rule
- (targets libwamr.a)
+ (targets libwamr.a dllwamr.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -124,55 +76,6 @@
      "."
      "-G"
      "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=0"
-     "-DCMAKE_BUILD_TYPE=Release"
-     "-DWAMR_BUILD_PLATFORM=linux"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=0"
-     "-DWAMR_BUILD_LIBC_WASI=1"
-     "-DWAMR_BUILD_LIBC_UVWASI=0"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
-    (run cmake --build . --config Release -- -j4)))))
-
-(rule
- (targets dllwamr.so)
- (locks .)
- (deps
-  CMakeLists.txt
-  (source_tree wasm-micro-runtime))
- (enabled_if
-  (= %{system} linux))
- (action
-  (no-infer
-   (progn
-    (run
-     "cmake"
-     "-S"
-     "."
-     "-B"
-     "."
-     "-G"
-     "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=1"
      "-DCMAKE_BUILD_TYPE=Release"
      "-DWAMR_BUILD_PLATFORM=linux"
      "-DWAMR_BUILD_INTERP=1"
@@ -200,10 +103,11 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr.so dllwamr.so)))))
+    (copy libwamr_static.a libwamr.a)
+    (copy libwamr_shared.so dllwamr.so)))))
 
 (rule
- (targets libwamr.a)
+ (targets libwamr.a dllwamr.dll)
  (locks .)
  (deps
   CMakeLists.txt
@@ -221,57 +125,6 @@
      "."
      "-G"
      "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=0"
-     "-DCMAKE_BUILD_TYPE=Release"
-     "-DWAMR_BUILD_PLATFORM=windows"
-     "-DWAMR_BUILD_INVOKE_NATIVE_GENERAL=1"
-     "-DWAMR_DISABLE_HW_BOUND_CHECK=1"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=0"
-     "-DWAMR_BUILD_LIBC_WASI=0"
-     "-DWAMR_BUILD_LIBC_UVWASI=1"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
-    (run cmake --build . --config Release -- -j4)))))
-
-(rule
- (targets dllwamr.dll)
- (locks .)
- (deps
-  CMakeLists.txt
-  (source_tree wasm-micro-runtime))
- (enabled_if
-  (= %{system} mingw64))
- (action
-  (no-infer
-   (progn
-    (run
-     "cmake"
-     "-S"
-     "."
-     "-B"
-     "."
-     "-G"
-     "Unix Makefiles"
-     "-DBUILD_SHARED_LIBS=1"
      "-DCMAKE_BUILD_TYPE=Release"
      "-DWAMR_BUILD_PLATFORM=windows"
      "-DWAMR_BUILD_INVOKE_NATIVE_GENERAL=1"
@@ -301,7 +154,8 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr.dll dllwamr.dll)))))
+    (copy libwamr_static.a libwamr.a)
+    (copy libwamr_shared.dll dllwamr.dll)))))
 
 (library
  (name libwamr_c)
