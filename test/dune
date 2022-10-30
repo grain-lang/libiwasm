@@ -8,7 +8,7 @@
   (build_flags_resolver
    (vendored
     (c_flags :standard)
-    (c_library_flags :standard)))
+    (c_library_flags :standard -lpthread)))
   (headers
    (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
   (type_description
