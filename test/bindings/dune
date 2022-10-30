@@ -4,7 +4,7 @@
  (flags
   (:standard -w -9-27-33))
  (ctypes
-  (external_library_name foobar)
+  (external_library_name wamr)
   (build_flags_resolver
    (vendored
     (c_flags :standard)
