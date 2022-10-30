@@ -308,5 +308,5 @@
  (modules)
  (public_name libwamr)
  (foreign_archives wamr)
- (c_library_flags :standard)
+ (c_library_flags :standard -lpthread)
  (install_c_headers lib_export wasm_export))
