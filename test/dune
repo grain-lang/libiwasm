@@ -5,6 +5,10 @@
   (:standard -w -9-27-33))
  (ctypes
   (external_library_name libwamr)
+  (build_flags_resolver
+   (vendored
+    (c_flags :standard)
+    (c_library_flags :standard)))
   (headers
    (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
   (type_description
