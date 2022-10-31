@@ -25,7 +25,7 @@ if (WAMR_BUILD_TARGET MATCHES "X86_.*" OR WAMR_BUILD_TARGET STREQUAL "AMD_64")
 endif ()
 
 if (MINGW)
-  file (COPY ${libuv_BINARY_DIR}/libuv_a.a ${WAMR_ROOT_DIR})
+  file (COPY ${libuv_BINARY_DIR}/libuv_a.a DESTINATION ${WAMR_ROOT_DIR})
 endif ()
 
 add_library(wamr_static STATIC ${WAMR_RUNTIME_LIB_SOURCE})
