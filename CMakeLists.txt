@@ -37,8 +37,3 @@ target_link_libraries (wamr_shared ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 if (MINGW)
   target_link_libraries (wamr_shared ws2_32)
 endif ()
-
-# Ensure we have direct access to libuv_a.a
-if (MINGW)
-  file (COPY ${libuv_BINARY_DIR}/libuv_a.a DESTINATION ${WAMR_ROOT_DIR})
-endif ()

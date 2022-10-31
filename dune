@@ -155,6 +155,7 @@
      "-DWAMR_BUILD_DEBUG_INTERP=0"
      "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
     (run cmake --build . --config Release -- -j4)
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
     (copy libwamr_static.a libwamr_c.a)
     (copy libwamr_shared.dll dllwamr_c.dll)))))
 
@@ -163,5 +164,8 @@
  (modules)
  (public_name libwamr)
  (foreign_archives wamr_c)
- (c_library_flags :standard -lpthread -liphlpapi -luserenv -luv_a)
+ (c_library_flags
+  :standard
+  -lpthread
+  (:include ./config/c_library_flags.sexp))
  (install_c_headers lib_export wasm_export))
