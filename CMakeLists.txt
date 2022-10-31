@@ -25,6 +25,7 @@ if (WAMR_BUILD_TARGET MATCHES "X86_.*" OR WAMR_BUILD_TARGET STREQUAL "AMD_64")
 endif ()
 
 add_library(wamr_static STATIC ${WAMR_RUNTIME_LIB_SOURCE})
+target_link_libraries (wamr_static ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 
 if (MINGW)
   target_link_libraries (wamr_static ws2_32)
