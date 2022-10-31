@@ -164,5 +164,5 @@
  (modules)
  (public_name libwamr)
  (foreign_archives wamr_c)
- (c_library_flags :standard -lpthread -liphlpapi -luv_a)
+ (c_library_flags :standard -lpthread -luv_a)
  (install_c_headers lib_export wasm_export))
