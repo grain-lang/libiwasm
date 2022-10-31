@@ -28,12 +28,12 @@ add_library(wamr_static STATIC ${WAMR_RUNTIME_LIB_SOURCE})
 target_link_libraries (wamr_static ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 
 if (MINGW)
-  target_link_libraries (wamr_static ws2_32 iphlpapi userenv)
+  target_link_libraries (wamr_static ws2_32)
 endif ()
 
 add_library(wamr_shared SHARED ${WAMR_RUNTIME_LIB_SOURCE})
 target_link_libraries (wamr_shared ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 
 if (MINGW)
-  target_link_libraries (wamr_shared ws2_32 iphlpapi userenv)
+  target_link_libraries (wamr_shared ws2_32)
 endif ()
