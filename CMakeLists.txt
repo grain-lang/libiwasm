@@ -24,10 +24,6 @@ if (WAMR_BUILD_TARGET MATCHES "X86_.*" OR WAMR_BUILD_TARGET STREQUAL "AMD_64")
   endif ()
 endif ()
 
-if (MINGW)
-  file (COPY ${libuv_BINARY_DIR}/libuv_a.a DESTINATION ${WAMR_ROOT_DIR})
-endif ()
-
 add_library(wamr_static STATIC ${WAMR_RUNTIME_LIB_SOURCE})
 target_link_libraries (wamr_static ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 
@@ -40,4 +36,9 @@ target_link_libraries (wamr_shared ${LLVM_AVAILABLE_LIBS} ${UV_A_LIBS})
 
 if (MINGW)
   target_link_libraries (wamr_shared ws2_32)
+endif ()
+
+# Ensure we have direct access to libuv_a.a
+if (MINGW)
+  file (COPY ${libuv_BINARY_DIR}/libuv_a.a DESTINATION ${WAMR_ROOT_DIR})
 endif ()
