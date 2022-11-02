@@ -2,4 +2,4 @@
 .ocamlformat    export-ignore
 
 # Ensure wasm always use LF
-*.wasm text eol=lf
+*.wasm binary
