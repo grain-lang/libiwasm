@@ -2,14 +2,14 @@ let res = Wamr.Functions.wasm_runtime_init () in
 if res == true then print_endline "wasm_runtime_init success" else print_endline "wasm_runtime_init fail";
 
 let input = open_in "test.gr.wasm" in
-let data = In_channel.input_all input in
+let data = really_input_string input (in_channel_length input) in
 
 let buf = Cstruct_cap.of_string data in
 let buf_start = Ctypes.(bigarray_start array1 (Cstruct_cap.unsafe_to_bigarray buf)) in
-let buf_size = Bigarray.Array1.dim (Cstruct_cap.unsafe_to_bigarray buf) in
+let buf_size = Bigarray.Array1.size_in_bytes (Cstruct_cap.unsafe_to_bigarray buf) in
 let error_buf = Cstruct_cap.create 1000 in
 let error_start = Ctypes.(bigarray_start array1 (Cstruct_cap.unsafe_to_bigarray error_buf)) in
-let error_size = Bigarray.Array1.dim (Cstruct_cap.unsafe_to_bigarray error_buf) in
+let error_size = Bigarray.Array1.size_in_bytes (Cstruct_cap.unsafe_to_bigarray error_buf) in
 let charptr_to_uint8ptr = Ctypes.(coerce (ptr char) (ptr uint8_t)) in
 let wasm_mod = Wamr.Functions.wasm_runtime_load (charptr_to_uint8ptr buf_start) (Unsigned.UInt32.of_int buf_size) error_start (Unsigned.UInt32.of_int error_size) in
 let _ = print_endline (Cstruct_cap.to_string error_buf) in
