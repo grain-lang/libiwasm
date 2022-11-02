@@ -1,7 +1,7 @@
 let res = Wamr.Functions.wasm_runtime_init () in
 if res == true then print_endline "wasm_runtime_init success" else print_endline "wasm_runtime_init fail";
 
-let input = open_in_bin "test.gr.wasm" in
+let input = open_in "test.gr.wasm" in
 let data = really_input_string input (in_channel_length input) in
 
 let buf = Cstruct_cap.of_string data in
