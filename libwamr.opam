@@ -17,6 +17,8 @@ depends: [
   "dune-configurator" {>= "3.1.0"}
   "ocaml" {>= "4.12"}
   "ctypes" {with-test}
+  "cstruct" {with-test}
+  "integers" {with-test}
 ]
 depexts: [
   ["gcc-g++"] { os-distribution = "cygwinports" }
