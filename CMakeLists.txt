@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 3.10.2)
 
-project(libwamr LANGUAGES C CXX VERSION 1.1.1)
+project(libwamr LANGUAGES C ASM CXX VERSION 1.1.1)
+enable_language(ASM_MASM)
 
 # Reset default linker flags
 set (CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
 set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
 
 set (CMAKE_C_STANDARD 99)
+
+add_definitions(-DCOMPILING_WASM_RUNTIME_API=1)
 
 set(WAMR_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/wasm-micro-runtime)
 
