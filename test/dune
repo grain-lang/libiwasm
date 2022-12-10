@@ -2,6 +2,14 @@
  (name test)
  (modules test)
  (deps test.gr.wasm)
- (libraries wamr cstruct integers)
+ (libraries wamr cstruct integers fd unix)
  (action
   (run %{test})))
+
+(library
+ (name fd)
+ (modules fd)
+ (foreign_stubs
+  (language c)
+  (names fd)
+  (flags :standard -O2 -Wall -Wextra)))

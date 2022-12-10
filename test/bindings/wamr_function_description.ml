@@ -17,7 +17,7 @@ module Functions (F : Ctypes.FOREIGN) = struct
 
   let wasm_application_execute_func = foreign "wasm_application_execute_func" (Types.wasm_module_inst_t @-> ptr char @-> int32_t @-> ptr (ptr char) @-> returning bool)
 
-  let wasm_runtime_set_wasi_args_ex = foreign "wasm_runtime_set_wasi_args_ex" (Types.wasm_module_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> int @-> int @-> int @-> int @-> returning void)
+  let wasm_runtime_set_wasi_args_ex = foreign "wasm_runtime_set_wasi_args_ex" (Types.wasm_module_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> int @-> int64_t @-> int64_t @-> int64_t @-> returning void)
   let wasm_runtime_set_wasi_args = foreign "wasm_runtime_set_wasi_args" (Types.wasm_module_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> uint32_t @-> ptr (ptr char) @-> int @-> returning void)
 end
 
