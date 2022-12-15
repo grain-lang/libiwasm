@@ -13,6 +13,7 @@ build: [
   [ "dune" "runtest" ] {with-test}
 ]
 depends: [
+  "conf-cmake" {build}
   "dune" {>= "3.1.0"}
   "dune-configurator" {>= "3.1.0"}
   "ocaml" {>= "4.12"}
