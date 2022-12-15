@@ -46,6 +46,7 @@
   },
   "keywords": [
     "wamr",
+    "iwasm",
     "wasm-micro-runtime",
     "webassembly",
     "runtime",

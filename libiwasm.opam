@@ -4,9 +4,9 @@ synopsis: "The iwasm core from wasm-micro-runtime packaged for OCaml"
 maintainer: "blaine@grain-lang.org"
 author: "Blaine Bublitz"
 license: "Apache-2.0"
-homepage: "https://github.com/grain-lang/libwamr"
-dev-repo: "git+https://github.com/grain-lang/libwamr.git"
-bug-reports: "https://github.com/grain-lang/libwamr/issues"
+homepage: "https://github.com/grain-lang/libiwasm"
+dev-repo: "git+https://github.com/grain-lang/libiwasm.git"
+bug-reports: "https://github.com/grain-lang/libiwasm/issues"
 build: [
   [ "dune" "subst" ] {dev}
   [ "dune" "build" "-p" name "-j" jobs ]
