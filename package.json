@@ -1,5 +1,5 @@
 {
-  "name": "@grain/libwamr",
+  "name": "@grain/libiwasm",
   "version": "0.0.0",
   "description": "The iwasm core from wasm-micro-runtime packaged for OCaml.",
   "author": "Blaine Bublitz <blaine@grain-lang.org>",
@@ -20,7 +20,7 @@
   },
   "esy": {
     "build": [
-      "dune build -p libwamr -j 4"
+      "dune build -p libiwasm -j 4"
     ],
     "buildEnv": {
       "PATH": "#{os == 'windows' ? '/usr/x86_64-w64-mingw32/sys-root/mingw/bin' : '' : $PATH }",

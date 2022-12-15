@@ -1,6 +1,6 @@
 (library
  (name wamr)
- (libraries libwamr)
+ (libraries libiwasm)
  (flags
   (:standard -w -9-27-33))
  (ctypes
@@ -10,7 +10,7 @@
     (c_flags :standard)
     (c_library_flags :standard)))
   (headers
-   (preamble "#include \"%{lib:libwamr:wasm_export.h}\""))
+   (preamble "#include \"%{lib:libiwasm:wasm_export.h}\""))
   (type_description
    (instance Type)
    (functor Wamr_type_description))

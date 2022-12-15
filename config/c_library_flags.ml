@@ -2,13 +2,13 @@ module C = Configurator.V1
 
 let () =
   C.main ~name:"c_library_flags" (fun c ->
-      let default = ["-lpthread"] in
+      let default = ["-lpthread"; "-luv_a"] in
 
       let c_library_flags =
         match C.ocaml_config_var c "system" with
         | Some "mingw64" ->
             (* Ref https://github.com/libuv/libuv/blob/v1.44.2/configure.ac#L77 *)
-            "-liphlpapi" :: "-luserenv" :: "-luv_a" :: default
+            "-liphlpapi" :: "-luserenv" :: default
         | Some _ -> default
         | None -> default
       in

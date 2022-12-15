@@ -9,7 +9,7 @@
     (copy wasm-micro-runtime/core/iwasm/include/wasm_export.h wasm_export.h)))))
 
 (rule
- (targets libwamr_c.a dllwamr_c.so)
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -28,37 +28,14 @@
      "-G"
      "Unix Makefiles"
      "-DCMAKE_BUILD_TYPE=Release"
-     "-DWAMR_BUILD_PLATFORM=darwin"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=1"
-     "-DWAMR_BUILD_LIBC_WASI=1"
-     "-DWAMR_BUILD_LIBC_UVWASI=0"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
+     "-DWAMR_BUILD_PLATFORM=darwin")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr_static.a libwamr_c.a)
-    (copy libwamr_shared.dylib dllwamr_c.so)))))
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.dylib dlliwasm_c.so)))))
 
 (rule
- (targets libwamr_c.a dllwamr_c.so)
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.so)
  (locks .)
  (deps
   CMakeLists.txt
@@ -77,37 +54,14 @@
      "-G"
      "Unix Makefiles"
      "-DCMAKE_BUILD_TYPE=Release"
-     "-DWAMR_BUILD_PLATFORM=linux"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=1"
-     "-DWAMR_BUILD_LIBC_WASI=1"
-     "-DWAMR_BUILD_LIBC_UVWASI=0"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
+     "-DWAMR_BUILD_PLATFORM=linux")
     (run cmake --build . --config Release -- -j4)
-    (copy libwamr_static.a libwamr_c.a)
-    (copy libwamr_shared.so dllwamr_c.so)))))
+    (copy _deps/libuv-build/libuv_a.a libuv_a.a)
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.so dlliwasm_c.so)))))
 
 (rule
- (targets libuv_a.a libwamr_c.a dllwamr_c.dll)
+ (targets libuv_a.a libiwasm_c.a dlliwasm_c.dll)
  (locks .)
  (deps
   CMakeLists.txt
@@ -127,42 +81,17 @@
      "Unix Makefiles"
      "-DCMAKE_BUILD_TYPE=Release"
      "-DWAMR_BUILD_PLATFORM=windows"
-     "-DWAMR_BUILD_TARGET=X86_64"
-     "-DWAMR_DISABLE_HW_BOUND_CHECK=1"
-     "-DWAMR_BUILD_INTERP=1"
-     "-DWAMR_BUILD_FAST_INTERP=1"
-     "-DWAMR_BUILD_AOT=0"
-     "-DWAMR_BUILD_JIT=0"
-     "-DWAMR_BUILD_FAST_JIT=0"
-     "-DWAMR_BUILD_LIBC_BUILTIN=1"
-     "-DWAMR_BUILD_LIBC_WASI=0"
-     "-DWAMR_BUILD_LIBC_UVWASI=1"
-     "-DWAMR_BUILD_MULTI_MODULE=0"
-     "-DWAMR_BUILD_MINI_LOADER=0"
-     "-DWAMR_BUILD_SHARED_MEMORY=0"
-     "-DWAMR_BUILD_BULK_MEMORY=1"
-     "-DWAMR_BUILD_THREAD_MGR=0"
-     "-DWAMR_BUILD_LIB_PTHREAD=0"
-     "-DWAMR_BUILD_LIB_PTHREAD_SEMAPHORE=0"
-     "-DWAMR_BUILD_TAIL_CALL=1"
-     "-DWAMR_BUILD_SIMD=0"
-     "-DWAMR_BUILD_CUSTOM_NAME_SECTION=0"
-     "-DWAMR_BUILD_DUMP_CALL_STACK=0"
-     "-DWAMR_BUILD_MEMORY_PROFILING=0"
-     "-DWAMR_BUILD_PERF_PROFILING=0"
-     "-DWAMR_BUILD_REF_TYPES=0"
-     "-DWAMR_BUILD_DEBUG_INTERP=0"
-     "-DWAMR_BUILD_LOAD_CUSTOM_SECTION=0")
+     "-DWAMR_BUILD_TARGET=X86_64")
     (run cmake --build . --config Release -- -j4)
     (copy _deps/libuv-build/libuv_a.a libuv_a.a)
-    (copy libwamr_static.a libwamr_c.a)
-    (copy libwamr_shared.dll dllwamr_c.dll)))))
+    (copy libiwasm_static.a libiwasm_c.a)
+    (copy libiwasm_shared.dll dlliwasm_c.dll)))))
 
 (library
- (name libwamr)
+ (name libiwasm)
  (modules)
- (public_name libwamr)
- (foreign_archives wamr_c)
+ (public_name libiwasm)
+ (foreign_archives iwasm_c)
  (c_library_flags
   :standard
   (:include ./config/c_library_flags.sexp))
