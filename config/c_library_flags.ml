@@ -8,7 +8,7 @@ let () =
         match C.ocaml_config_var c "system" with
         | Some "mingw64" ->
             (* Ref https://github.com/libuv/libuv/blob/v1.44.2/configure.ac#L77 *)
-            ["-liphlpapi"; "-luserenv"; "-luv_a"]
+            "-liphlpapi" :: "-luserenv" :: "-luv_a" :: default
         | Some _ -> default
         | None -> default
       in
