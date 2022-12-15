@@ -165,6 +165,5 @@
  (foreign_archives wamr_c)
  (c_library_flags
   :standard
-  -lpthread
   (:include ./config/c_library_flags.sexp))
  (install_c_headers lib_export wasm_export))

@@ -2,7 +2,7 @@ module C = Configurator.V1
 
 let () =
   C.main ~name:"c_library_flags" (fun c ->
-      let default = [] in
+      let default = ["-lpthread"] in
 
       let c_library_flags =
         match C.ocaml_config_var c "system" with
