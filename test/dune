@@ -2,6 +2,6 @@
  (name test)
  (modules test)
  (deps test.gr.wasm)
- (libraries wamr cstruct integers)
+ (libraries wamr)
  (action
   (run %{test})))
