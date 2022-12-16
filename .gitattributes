@@ -1,4 +1,26 @@
+.vscode         export-ignore
 .github         export-ignore
 .ocamlformat    export-ignore
+
+wasm-micro-runtime/.devcontainer                export-ignore
+wasm-micro-runtime/.github                      export-ignore
+wasm-micro-runtime/assembly-script              export-ignore
+wasm-micro-runtime/build-scripts/esp-idf        export-ignore
+wasm-micro-runtime/build-scripts/build_llvm.py  export-ignore
+wasm-micro-runtime/**/SConscript                export-ignore
+wasm-micro-runtime/**/SConscript_config         export-ignore
+wasm-micro-runtime/ci                           export-ignore
+wasm-micro-runtime/core/app-framework           export-ignore
+wasm-micro-runtime/core/app-mgr                 export-ignore
+wasm-micro-runtime/core/deps                    export-ignore
+wasm-micro-runtime/doc                          export-ignore
+wasm-micro-runtime/language-bindings            export-ignore
+wasm-micro-runtime/product-mini                 export-ignore
+wasm-micro-runtime/samples                      export-ignore
+wasm-micro-runtime/test-tools/**                export-ignore
+wasm-micro-runtime/tests                        export-ignore
+wasm-micro-runtime/wamr-compiler                export-ignore
+wasm-micro-runtime/wamr-sdk                     export-ignore
+wasm-micro-runtime/zephyr                       export-ignore
 
 *.wasm          binary
