@@ -78,7 +78,8 @@
      "-B"
      "."
      "-G"
-     "MinGW Makefiles"
+     "Unix Makefiles"
+     "-DCMAKE_SYSTEM_NAME=Windows"
      "-DCMAKE_BUILD_TYPE=Release"
      "-DWAMR_BUILD_PLATFORM=windows"
      "-DWAMR_BUILD_TARGET=X86_64")
