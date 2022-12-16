@@ -29,4 +29,4 @@ let () = match wasm_mod with
         let success = Wamr.Functions.wasm_application_execute_func wasm_mod_inst start_func_start (Signed.Int32.of_int 0) (Ctypes.from_voidp (Ctypes.ptr Ctypes.char) Ctypes.null) in
         let () = if success then print_endline "Ran successfully" else print_endline "Failed to run" in
         let () = Wamr.Functions.wasm_runtime_destroy () in
-        print_endline "wasm_runtime_destroy" in () in ()
+        print_string "wasm_runtime_destroy" in () in ()
