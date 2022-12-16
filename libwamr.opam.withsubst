@@ -1,0 +1,25 @@
+opam-version: "2.0"
+version: "0.0.0"
+synopsis: "wasm-micro-runtime's iwasm core packaged for OCaml"
+maintainer: "blaine@grain-lang.org"
+author: "Blaine Bublitz"
+license: "Apache-2.0"
+homepage: "https://github.com/grain-lang/libwamr"
+dev-repo: "git+https://github.com/grain-lang/libwamr.git"
+bug-reports: "https://github.com/grain-lang/libwamr/issues"
+build: [
+  [ "dune" "subst" ] {dev}
+  [ "dune" "build" "-p" name "-j" jobs ]
+  [ "dune" "runtest" ] {with-test}
+]
+substs: [
+  "libwamr.config"
+  "dune"
+]
+depends: [
+  "dune" {>= "3.1.0"}
+  "ocaml" {>= "4.12"}
+]
+depexts: [
+  ["gcc-g++"] { os-distribution = "cygwinports" }
+]
